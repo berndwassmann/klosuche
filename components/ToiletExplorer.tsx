@@ -22,8 +22,18 @@ export default function ToiletExplorer({ toilets }: { toilets: Toilet[] }) {
 
   return (
     <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
-      {/* Sidebar */}
-      <aside className="md:w-80 flex flex-col bg-white border-r border-gray-200 overflow-hidden">
+
+      {/* Karte — mobil oben, Desktop rechts */}
+      <div className="h-56 sm:h-72 md:h-auto md:flex-1 relative order-first md:order-last">
+        <MapView
+          toilets={filtered}
+          selectedId={selectedId}
+          onSelect={setSelectedId}
+        />
+      </div>
+
+      {/* Sidebar — mobil unten, Desktop links */}
+      <aside className="md:w-80 flex flex-col bg-white border-t md:border-t-0 md:border-r border-gray-200 overflow-hidden flex-1 md:flex-none">
         {/* Suchfeld */}
         <div className="p-3 border-b border-gray-100">
           <div className="relative">
@@ -66,14 +76,6 @@ export default function ToiletExplorer({ toilets }: { toilets: Toilet[] }) {
         </div>
       </aside>
 
-      {/* Karte */}
-      <div className="flex-1 relative min-h-64">
-        <MapView
-          toilets={filtered}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-        />
-      </div>
     </div>
   );
 }

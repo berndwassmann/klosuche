@@ -11,27 +11,13 @@ export default async function HomePage() {
     .order("name");
 
   return (
-    <main className="flex flex-col h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 z-10 shadow-sm">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="bg-blue-600 text-white rounded-xl w-9 h-9 flex items-center justify-center text-lg font-bold shadow-sm">
-              🚽
-            </div>
-            <div>
-              <h1 className="text-base font-bold text-gray-900 leading-tight">KloSuche München</h1>
-              <p className="text-xs text-gray-400">Öffentliche Toiletten auf einen Blick</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs bg-blue-50 text-blue-600 px-2.5 py-1 rounded-full font-medium">
-              {(toilets ?? []).length} Standorte
-            </span>
-          </div>
-        </div>
-      </header>
-
+    <main className="flex flex-col flex-1 overflow-hidden bg-gray-50">
+      <div className="px-4 py-2 bg-white border-b border-gray-100 flex items-center justify-between">
+        <p className="text-xs text-gray-400">Öffentliche Toiletten auf einen Blick</p>
+        <span className="text-xs bg-blue-50 text-blue-600 px-2.5 py-1 rounded-full font-medium">
+          {(toilets ?? []).length} Standorte
+        </span>
+      </div>
       <ToiletExplorer toilets={(toilets as Toilet[]) ?? []} />
     </main>
   );

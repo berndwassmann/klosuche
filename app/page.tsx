@@ -1,7 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import MapView from "@/components/MapView";
-import ToiletList from "@/components/ToiletList";
-import SearchBar from "@/components/SearchBar";
+import ToiletExplorer from "@/components/ToiletExplorer";
 import { Toilet } from "@/lib/types";
 
 export default async function HomePage() {
@@ -13,28 +11,28 @@ export default async function HomePage() {
     .order("name");
 
   return (
-    <main className="flex flex-col h-screen">
-      <header className="bg-blue-600 text-white px-4 py-3 shadow-md z-10">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-xl font-bold">🚽 KloSuche München</h1>
-          <p className="text-blue-100 text-sm">Öffentliche Toiletten auf einen Blick</p>
+    <main className="flex flex-col h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 px-4 py-3 z-10 shadow-sm">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="bg-blue-600 text-white rounded-xl w-9 h-9 flex items-center justify-center text-lg font-bold shadow-sm">
+              🚽
+            </div>
+            <div>
+              <h1 className="text-base font-bold text-gray-900 leading-tight">KloSuche München</h1>
+              <p className="text-xs text-gray-400">Öffentliche Toiletten auf einen Blick</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-xs bg-blue-50 text-blue-600 px-2.5 py-1 rounded-full font-medium">
+              {(toilets ?? []).length} Standorte
+            </span>
+          </div>
         </div>
       </header>
 
-      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
-        <aside className="md:w-80 flex flex-col bg-white border-r border-gray-200 md:overflow-y-auto">
-          <div className="p-3 border-b border-gray-200">
-            <SearchBar />
-          </div>
-          <div className="flex-1 overflow-y-auto">
-            <ToiletList toilets={(toilets as Toilet[]) ?? []} />
-          </div>
-        </aside>
-
-        <div className="flex-1 relative min-h-64">
-          <MapView toilets={(toilets as Toilet[]) ?? []} />
-        </div>
-      </div>
+      <ToiletExplorer toilets={(toilets as Toilet[]) ?? []} />
     </main>
   );
 }
